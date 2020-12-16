@@ -1,6 +1,30 @@
+# dependencies
+/node_modules
+
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/log
 .idea
-bin
-lib
-lib64
-venv
-share
+log.txt
+*.pyc
+data.json
+test.py
+/logs/*
+/cookies/*
+proxy.txt
+.vs
+/scanners/betfair_objects/tmp/*
+/scanners/betfair_objects/tmp/menu.json
+.ipynb_checkpoints
+*.ipynb
+/.vscode
+/jsons
+possible_bets_list.txt
+/pickles
+*.pickle
+/tmp/
+tests.py
