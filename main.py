@@ -15,8 +15,6 @@ if __name__ == '__main__':
     # with open('./data_samples/beeline.json') as f:
     #     company = json.loads(f.read())
 
-    # phone = PhoneFormat(phone='88002500250', tpl='+$ $$$ $$$-$$-$$')
-
     api = ZpApi('rostovskaya-oblast')
     res = api.do_request('vacancies', 204506901)
 
