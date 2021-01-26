@@ -9,9 +9,9 @@ class DbConnection:
         return cls.instance
 
     def __init__(self):
-        self.user = 'workuser'
+        self.user = 'root'
         self.password = 'password'
-        self.db_name = 'work2'
+        self.db_name = 'workTEST'
         self.host = 'localhost'
 
         self.db_handle = MySQLDatabase(

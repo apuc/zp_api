@@ -1,15 +1,22 @@
 from include.helpers.PasswordGen import PasswordGen as pw
+from include.helpers.EmailGenerator import EmailGenerator as emgen
 import time
 
 
 class UserDTO:
     def __init__(self, user):
         dt: int = int(round(time.time()))
-        self.email = user.get('email', 'some@mail.ru')
-        self.title = user.get('title', 'Имя компании')
-        self.website = user.get('external_url', '')
-        self.username = user.get('email', 'some@mail.ru')
-        self.description = user.get('description', 'Описание')
+        self.comp_id = user['id']
+
+        if user['email'] == None or user['email'] == '':
+            self.email = emgen.email_generator(user['title'])
+        else:
+            self.email = user['email']
+
+        self.title = user['title']
+        self.website = user['external_url']
+        # self.username = user['email']
+        self.description = user['description']
         self.password_hash = pw.password_hash(pw.generate_str())
         self.auth_key = pw.generate_str(32)
         self.confirmed_at = dt
@@ -18,9 +25,6 @@ class UserDTO:
 
         self.firstname = ''
         self.lastname = ''
-        self.logo = ''
-        self.activity_field = ''
-
         if any([item for item in user.get('contacts', [])]):
             self.firstname = user['contacts'][0].get('firstname', '')
             self.lastname = user['contacts'][0].get('lastname', '')
@@ -28,9 +32,25 @@ class UserDTO:
             if any([item for item in phones]):
                 self.phone = phones[0].get('phone', None)
 
-        if any([item for item in user.get('logo', [])]):
-            self.logo = user['logo'].get('url')
+        self.logo = ''
+        try:
+            if any([item for item in user.get('logo', [])]):
+                self.logo = user['logo'].get('url')
+        except:
+            self.logo = None
 
+        self.activity_field = ''
         if any([item for item in user.get('rubrics', [])]):
             for rubric in user.get('rubrics'):
                 self.activity_field = self.activity_field + rubric.get('title', '') + ' '
+
+        self.user_id = user['id']
+        self.vk = None
+        self.facebook = None
+        self.instagram = None
+        self.skype = None
+        self.status = None
+        self.is_trusted = None
+        self.valance = None
+        self.valance_renew_count = None
+        self.create_vacancy = None
