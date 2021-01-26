@@ -1,14 +1,21 @@
 from include.helpers.PasswordGen import PasswordGen as pw
+from include.helpers.EmailGenerator import EmailGenerator as emgen
 import time
 
 
 class UserDTO:
     def __init__(self, user):
         dt: int = int(round(time.time()))
-        self.email = user['email']
+        self.comp_id = user['id']
+
+        if user['email'] == None or user['email'] == '':
+            self.email = emgen.email_generator(user['title'])
+        else:
+            self.email = user['email']
+
         self.title = user['title']
         self.website = user['external_url']
-        self.username = user['email']
+        # self.username = user['email']
         self.description = user['description']
         self.password_hash = pw.password_hash(pw.generate_str())
         self.auth_key = pw.generate_str(32)
@@ -40,6 +47,7 @@ class UserDTO:
         self.user_id = user['id']
         self.vk = None
         self.facebook = None
+        self.instagram = None
         self.skype = None
         self.status = None
         self.is_trusted = None
